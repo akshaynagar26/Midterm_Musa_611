@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+
+  <head>
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <!-- =====================
+    Edit css/style.css
+    ====================== -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+
+
+
+
+
+
+
+
+    <!-- Map -->
+    <div id="map" class="map"></div>
+
+
+
+
+    <!-- Javascript Imports Here -->
+    <script src="js/leaflet.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/jquery-2.2.0.js"></script>
+    <script src="js/part1-jquery.js"></script>
+
+    <div id="map" style="position: absolute; top:0; height: 100%; right: 0; left: 400">
+
+      <h4>London Map</h4>
+    </div>
+
+
+    <div id="sidebar" style="position: absolute; top:0; left: 0; width: 400px; height: 100%; background-color: red">
+      <h1 id="title">Tour of London</h1>
+      <p id="description">We will take you to some key Areas in London</p>
+      <p id="information">This is a virtual London Tour</p>
+      <button id="nextButton">next</button>
+      <button id="nextButton2">previous</button>
+<p>
+<h2><p> Airbnb Statistics   <p></h2>
+Total Number of Reviews in the area is
+  <span class="day-of-week" id='s2'>
+    Click on Map</span></p>(Annual Average)
+
+        <p class="main">Average Review Score is  <span class="day-of-week" id='s1'>
+                Score</span>.</p>
+
+                <div class="legend"></div>
+                  <div class='my-legend'>
+                <div class='legend-title'> <br>      Score Color Scheme</div>
+                <div class='legend-scale'>
+                  <ul class='legend-labels'>
+                    <li><span style="background-color:#1a9850";></span>Greater than 93</li>
+                    <li><span style="background-color:#91cf60";></span>92-93</li>
+                    <li><span style="background-color:#d9ef8b";></span>91-92</li>
+                    <li><span style="background-color:#ffffbf";></span>90-91</li>
+                    <li><span style="background-color:#fee08b";></span>89-90</li>
+                    <li><span style="background-color:#fc8d59";></span>88-89</li>
+                    <li><span style="background-color:#ff6e99";></span>Less than 88</li>
+                  </ul>
+                  <style type='text/css'>
+                    .my-legend .legend-title {
+                      text-align: left;
+                      margin-bottom: 0px;
+                      font-weight: bold;
+                      font-size: 90%;
+                      }
+                    .my-legend .legend-scale ul {
+                      margin: 15px;
+                      margin-bottom: 20px;
+                      padding: 0;
+                      float: left;
+                      list-style: none;
+                      }
+                    .my-legend .legend-scale ul li {
+                      font-size: 80%;
+                      list-style: none;
+                      margin-left: 0;
+                      line-height: 18px;
+                      margin-bottom: 2px;
+                      }
+                    .my-legend ul.legend-labels li span {
+                      display: block;
+                      float: left;
+                      height: 14px;
+                      width: 30px;
+                      margin-right: 5px;
+                      margin-left: 0;
+                      border: 1px solid #999;
+                      }
+                    .my-legend .legend-source {
+                      font-size: 70%;
+                      color: #999;
+                      clear: both;
+                      }
+                    .my-legend a {
+                      color: #777;
+                      }
+                    .fieldset {
+                      position:relative;
+                      padding-top:50px;
+                  }
+
+                  legend {
+                      position:absolute;
+                      top:0px;
+                      left:18px;
+                  }​
+                  </style>
+                </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+
+
+
+    <script>
+      // slide model:
+      // a title
+      // a description
+      // background color
+
+      $('#nextButton2').hide()
+
+      var slides = [
+        { title: "Tour of London", description: "We will take you to some key Areas in London ", color: "#FF0000",information:"This is a virtual London Tour" },
+        { title: "Stop 1 Chelsea", description: "This is zone 1 Chelsea", color: "#FFFF00",information:"Chelsea and Kensignton Burrough" },
+        { title: "Stop 2 Westminster", description: "Here we see the Big ben and houses of Parliament", color: "#FF00FF" ,information:"Westminster Burrough" },
+        { title: "Stop 3 Leicester Square", description: "the first description", color: "#00FFFF" ,information:"Burrough of Soho" },
+        { title: "Last Stop Hampstead Heath", description: "This is the meadows and parks of Hampstead Heath", color: "#F0F0F0" ,information:"Burrough of Hampstead" }
+      ]
+      var currentSlide = 0
+      var zoom= [[51.5174, -0.1278],[51.4991, -0.1938],[51.4975, -0.1357],[51.5104, -0.1301],[51.5608, -0.1631]]
+      var zlevel= [12,11,14,13,11]
+
+
+
+
+      var loadSlide = function(slide) {
+
+        if (currentSlide == 0 ) {
+          $('#nextButton2').hide()
+        }
+        else{
+          $('#nextButton2').show()
+        }
+        $('#title').text(slide.title)
+        $('#description').text(slide.description)
+        $('#information').text(slide.information)
+        $('#sidebar').css("background-color", slide.color)
+      }
+
+
+      var next = function() {
+        if (currentSlide == slides.length - 1) {
+        } else {
+          $('#nextButton').show()
+
+          currentSlide = currentSlide + 1
+          loadSlide(slides[currentSlide])
+          console.log(currentSlide)
+          map.setView(zoom[currentSlide]);
+          map.setZoom(zlevel[currentSlide]);
+
+          L.marker(zoom[currentSlide]).addTo(map);
+
+        }
+
+
+        if (currentSlide == slides.length - 1 ) {
+          $('#nextButton').hide()
+          
+
+        }
+
+
+      }
+
+
+
+      var previous = function() {
+        if (currentSlide == 0 ) {
+          $('#nextButton2').hide()
+
+        }
+        else if (currentSlide == slides.length  ) {
+        } else {
+          $('#nextButton2').show()
+          $('#nextButton').show()
+          currentSlide = currentSlide - 1
+          loadSlide(slides[currentSlide])
+          console.log(currentSlide)
+          map.setView(zoom[currentSlide])
+          map.setZoom(zlevel[currentSlide])
+          L.marker(zoom[currentSlide]).addTo(map);
+        }
+
+
+
+
+      }
+
+
+      $('#nextButton').click(function(e) {
+        next()
+      });
+
+      $('#nextButton2').click(function(e) {
+        previous()
+      });
+
+    </script>
+
+
+
+
+  </body>
+</html>
