@@ -3,7 +3,7 @@
 ===================== */
 var map = L.map('map', {
   center: [51.5074, -0.1278],
-  zoom: 12
+  zoom: 11
 });
 var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -14,7 +14,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 }).addTo(map);
 
 
-var dataset = "https://raw.githubusercontent.com/akshaynagar26/Midterm_Musa_611/master/converted.geojson?token=ANBH2HFXI75T4KT3N6RTQ726SN62Y";
+var dataset = "https://raw.githubusercontent.com/akshaynagar26/Midterm_Musa_611/master/converted.geojson?token=ANBH2HDK7R7B55MHBZSYOGS6SOE2A";
 var featureGroup;
 
 var myStyle = function(feature){

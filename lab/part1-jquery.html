@@ -150,12 +150,12 @@ Total Number of Reviews in the area is
         { title: "Tour of London", description: "We will take you to some key Areas in London ", color: "#FF0000",information:"This is a virtual London Tour" },
         { title: "Stop 1 Chelsea", description: "This is zone 1 Chelsea", color: "#FFFF00",information:"Chelsea and Kensignton Burrough" },
         { title: "Stop 2 Westminster", description: "Here we see the Big ben and houses of Parliament", color: "#FF00FF" ,information:"Westminster Burrough" },
-        { title: "Stop 3 Leicester Square", description: "the first description", color: "#00FFFF" ,information:"Burrough of Soho" },
+        { title: "Stop 3 Leicester Square", description: "Nightlife District", color: "#00FFFF" ,information:"Burrough of Soho" },
         { title: "Last Stop Hampstead Heath", description: "This is the meadows and parks of Hampstead Heath", color: "#F0F0F0" ,information:"Burrough of Hampstead" }
       ]
       var currentSlide = 0
       var zoom= [[51.5174, -0.1278],[51.4991, -0.1938],[51.4975, -0.1357],[51.5104, -0.1301],[51.5608, -0.1631]]
-      var zlevel= [12,11,14,13,11]
+      var zlevel= [11,16,15,16,15,17]
 
 
 
@@ -183,7 +183,7 @@ Total Number of Reviews in the area is
           currentSlide = currentSlide + 1
           loadSlide(slides[currentSlide])
           console.log(currentSlide)
-          map.setView(zoom[currentSlide]);
+          map.panTo(zoom[currentSlide]);
           map.setZoom(zlevel[currentSlide]);
 
           L.marker(zoom[currentSlide]).addTo(map);
@@ -193,7 +193,8 @@ Total Number of Reviews in the area is
 
         if (currentSlide == slides.length - 1 ) {
           $('#nextButton').hide()
-          
+
+
 
         }
 
@@ -214,7 +215,7 @@ Total Number of Reviews in the area is
           currentSlide = currentSlide - 1
           loadSlide(slides[currentSlide])
           console.log(currentSlide)
-          map.setView(zoom[currentSlide])
+          map.panTo(zoom[currentSlide])
           map.setZoom(zlevel[currentSlide])
           L.marker(zoom[currentSlide]).addTo(map);
         }
